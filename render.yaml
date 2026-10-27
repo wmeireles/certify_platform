@@ -7,6 +7,8 @@ services:
     buildCommand: npm ci && npm run build
     staticPublishPath: dist
     envVars:
+      - key: SKIP_INSTALL_DEPS
+        value: 'true'
       - key: VITE_API_URL
         sync: false
     routes:
