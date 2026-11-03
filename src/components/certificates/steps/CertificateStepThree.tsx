@@ -3,7 +3,15 @@ import { CertificateResumeStepThree } from "../CertificateResumeStepThree";
 import { CertificateSentFiles } from "../CertificateSentFiles";
 import { ParticipantsListContainer } from "../ParticipantsListContainer";
 
-export function CertificateStepThree({ onBack }: { onBack: () => void }) {
+export function CertificateStepThree({
+  onBack,
+  onGenerate,
+  isPending,
+}: {
+  onBack: () => void;
+  onGenerate: () => void;
+  isPending: boolean;
+}) {
 
   return (
     <div className="flex gap-3 mt-8">
@@ -14,7 +22,7 @@ export function CertificateStepThree({ onBack }: { onBack: () => void }) {
           <CertificateSentFiles />
         </div>
 
-        <ParticipantsListContainer onBack={onBack} />
+        <ParticipantsListContainer onBack={onBack} onGenerate={onGenerate} isPending={isPending} />
       </div>
 
       <div className="w-1/3">

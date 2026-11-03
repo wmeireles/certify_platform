@@ -4,10 +4,16 @@ import { ReviewParticipantsTable } from "./ReviewParticipantsTable";
 import { FiUsers } from "react-icons/fi";
 import { BiCheck } from "react-icons/bi";
 import { useSaveCertificateDraft } from "@/hooks/Certificate/useSaveCertificateDraft";
-import { useState } from "react";
-import { CertificateGenerateModal } from "./CertificateGenerateModal";
 
-export function ParticipantsListContainer({ onBack }: { onBack: () => void }) {
+export function ParticipantsListContainer({
+  onBack,
+  onGenerate,
+  isPending,
+}: {
+  onBack: () => void;
+  onGenerate: () => void;
+  isPending: boolean;
+}) {
   const {
     participants: manualParticipants,
     selectedIds,
@@ -20,8 +26,6 @@ export function ParticipantsListContainer({ onBack }: { onBack: () => void }) {
   } = useCertificateParticipants();
 
   const { saveCurrentFormAsDraft } = useSaveCertificateDraft();
-
-  const [showGenerateModal, setShowGenerateModal] = useState(false)
 
   return (
     <div className="mt-3 rounded-md border border-[#E2E8F0CC] bg-white p-6">
@@ -111,17 +115,16 @@ export function ParticipantsListContainer({ onBack }: { onBack: () => void }) {
           </button>
           <button
             type="button"
-            onClick={() => setShowGenerateModal(true)}
+            onClick={onGenerate}
+            disabled={isPending}
+            aria-busy={isPending}
             className="text-white text-sm bg-[#0069A8] rounded-md px-5 py-2.5 cursor-pointer"
           >
-            Gerar certificados
+            {isPending ? "Gerando certificados..." : "Gerar certificados"}
           </button>
         </div>
       </div>
 
-      {showGenerateModal && (
-        <CertificateGenerateModal onCancel={() => setShowGenerateModal(false)} />
-      )}
     </div>
   )
 }

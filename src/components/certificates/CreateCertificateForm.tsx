@@ -187,7 +187,9 @@ export function CreateCertificateForm({ draft }: CreateCertificateFormProps) {
           />
         )}
         {step === 2 && <CertificateStepTwo onNext={goNext} onBack={goBack} />}
-        {step === 3 && <CertificateStepThree onBack={goBack} />}
+        {step === 3 && (
+          <CertificateStepThree onBack={goBack} onGenerate={submitForm} isPending={isPending} />
+        )}
       </form>
 
       <SuccessCertificateModal isOpen={showSuccess} certificatesCount={certificateIds.length}

@@ -49,7 +49,7 @@ test('participant step validates the list and supports back and continue', async
   });
   await page.goto('/empresa/certificados/criar/draft-id');
   await page.getByRole('button', {name: 'Continuar', exact: true}).click();
-  await expect(page.getByRole('button', {name: 'Confirmar', exact: true})).toBeVisible();
+  await expect(page.getByRole('button', {name: 'Gerar certificados', exact: true})).toBeVisible();
   await page.getByRole('button', {name: 'Voltar', exact: true}).click();
   await page.getByRole('checkbox', {name: 'Selecionar todos os participantes', exact: true}).check();
   await page.getByRole('button', {name: 'Remover selecionados', exact: true}).click();
@@ -137,7 +137,7 @@ test('issuance creates a real event and defers student links until Send now', as
     await route.fulfill({json: {success: true, data: {total: 1, sent: 1, failed: 0, pending: 0}}});
   });
   await page.goto('/empresa/certificados/criar/draft-id');
-  await page.getByRole('button', {name: 'Confirmar', exact: true}).click();
+  await page.getByRole('button', {name: 'Gerar certificados', exact: true}).click();
   await expect(page.getByRole('heading', {name: '1 certificados foram gerados com sucesso'})).toBeVisible();
   expect(sent).toBe(0);
   await page.getByRole('button', {name: 'Enviar links agora'}).click();
